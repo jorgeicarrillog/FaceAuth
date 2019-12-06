@@ -14,10 +14,11 @@ class FaceController extends Controller
     }
     public function upload(Request $request)
     {
-    	$file = base64_decode($request->file);
-    	$response = Cloudder::upload($file);
+    	//$file = base64_decode($request->file);
+    	$response = Cloudder::upload($request->file);
     	$id = Cloudder::getPublicId();
     	$urlResponse = Cloudder::show($id);
+    	dd($urlResponse,$response);
     	if (isset($urlResponse) && isset($urlResponse['secure_url'])) {
 	    	$options = [
 	            'auth' => $credential, 

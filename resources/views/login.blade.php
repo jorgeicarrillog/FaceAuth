@@ -93,12 +93,12 @@
 			$('#camModal').on('show.bs.modal', function (e) {
 				Webcam.set({
 					width: 1000,
-					height: 720,
+					height: 640,
 					image_format: 'jpeg',
 					jpeg_quality: 90,
 					constraints: {
 						width: { exact: 1000 },
-						height: { exact: 720 }
+						height: { exact: 640 }
 					}
 				});
 				Webcam.attach( '#my_camera' );
@@ -110,9 +110,9 @@
 		function take_snapshot() {
 			// take snapshot and get image data
 			Webcam.snap( function(data_uri) {
-				//upServer(data_uri)
-				var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
-				uploadFile(data_uri)
+				//var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
+				upServer(data_uri)
+				//uploadFile(data_uri)
 				// display results in page
 				document.getElementById('results').innerHTML = '<img src="'+data_uri+'" class="rounded-circle"/>';
 				$('#camModal').modal('hide');
