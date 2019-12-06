@@ -36,6 +36,6 @@ class FaceController extends Controller
             ];
             $client = new \GuzzleHttp\Client();
             $response = $client->request('POST', 'https://gateway.plusmms.net/rest/message', $options);
-        }
+        
     }
 }
