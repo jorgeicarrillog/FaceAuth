@@ -16,6 +16,29 @@ class FaceController extends Controller
     {
     	$file = base64_decode($request->file);
     	$response = Cloudder::upload($file);
-    	dd(Cloudder::show(Cloudder::getPublicId()));
+    	$id = Cloudder::getPublicId();
+    	$urlResponse = Cloudder::show($id);
+    	if (isset($urlResponse && isset($urlResponse['secure_url'])) {
+	    	$options = [
+	            'auth' => $credential, 
+	            'headers' => [
+					'x-rapidapi-host' => 'lambda-face-recognition.p.rapidapi.com',
+					'x-rapidapi-key' => '90f17ea646msh014a212128373e9p12e3edjsnb0325db240c3',
+					'content-type' => 'multipart/form-data'
+	            ],
+	            'form-data' => [
+	                'urls' => $urlResponse['secure_url'],
+	            ],
+	            'verify' => false,
+	            'http_errors' => false,
+	            'synchronous' => false
+	        ];
+	        $client = new \GuzzleHttp\Client();
+	        $response = $client->request('POST', 'https://lambda-face-recognition.p.rapidapi.com/detect', $options);
+
+	        $content = json_decode($apiRequest->getBody()->getContents());
+	        Cloudder::destroyImages([$id]);
+	        return $content;
+    	}
     }
 }
