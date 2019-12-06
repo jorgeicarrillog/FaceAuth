@@ -14,8 +14,8 @@ class FaceController extends Controller
     }
     public function upload(Request $request)
     {
-    	Storage::put('avatars/1.jpg', base64_decode($request->file));
-    	dd(Storage::url('avatars/1.jpg'));
+    	Storage::put('public/avatars/1.jpg', base64_decode($request->file));
+    	dd(Storage::url('public/avatars/1.jpg'));
 			$options = [
                 'auth' => $credential, 
                 'headers' => [
