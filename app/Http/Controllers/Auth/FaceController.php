@@ -37,7 +37,7 @@ class FaceController extends Controller
 	        $response = $client->request('POST', 'https://lambda-face-recognition.p.rapidapi.com/detect', $options);
 
 	        $content = json_decode($apiRequest->getBody()->getContents());
-	        Cloudder::destroyImages([$id]);
+	        $response = Cloudder::destroyImages([$id]);
 	        return $content;
     	}
     }
