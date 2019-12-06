@@ -15,7 +15,7 @@ class FaceController extends Controller
     public function upload(Request $request)
     {
     	Storage::put('avatars/1.jpg', base64_decode($request->file));
-    	dd(asset('avatars/1.jpg'));
+    	dd(Storage::url('avatars/1.jpg'));
 			$options = [
                 'auth' => $credential, 
                 'headers' => [
@@ -36,6 +36,6 @@ class FaceController extends Controller
             ];
             $client = new \GuzzleHttp\Client();
             $response = $client->request('POST', 'https://gateway.plusmms.net/rest/message', $options);
-        
+        }
     }
 }
