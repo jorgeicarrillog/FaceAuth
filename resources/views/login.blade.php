@@ -133,7 +133,7 @@
 			var settings = {
 				"crossDomain": true,
 				//"url": "https://creator.zoho.com/api/xml/fileupload/scope=creatorapi&authtoken=5da8025b01842edd8614d6a96e3e99b0",
-				"url" : "{{secure_url('/upload')}}",
+				"url" : "upload",
 				"method": "POST",
 				"processData": false,
 				"contentType": false,
