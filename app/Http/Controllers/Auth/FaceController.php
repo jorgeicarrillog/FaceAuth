@@ -114,7 +114,7 @@ class FaceController extends Controller
 	    // order the reference's children by the values in the field 'height'
 	    ->orderByChild('email')
 	    // returns all persons being exactly 1.98 (meters) tall
-	    ->equalTo('jorgei.carrillog@autonoma.edu.co')
+	    ->equalTo($email)
 	    ->getSnapshot();
 
 	    $items = $result->getValue();
