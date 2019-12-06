@@ -6,21 +6,21 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{{asset('assets/Login_v1/images/icons/favicon.ico')}}"/>
+	<link rel="icon" type="image/png" href="{{secure_asset'assets/Login_v1/images/icons/favicon.ico')}}"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<!--<link rel="stylesheet" type="text/css" href="{{asset('assets/Login_v1/vendor/bootstrap/css/bootstrap.min.css')}}">-->
+	<!--<link rel="stylesheet" type="text/css" href="{{secure_asset'assets/Login_v1/vendor/bootstrap/css/bootstrap.min.css')}}">-->
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/Login_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{secure_asset'assets/Login_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/Login_v1/vendor/animate/animate.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{secure_asset'assets/Login_v1/vendor/animate/animate.css')}}">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/Login_v1/vendor/css-hamburgers/hamburgers.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{secure_asset'assets/Login_v1/vendor/css-hamburgers/hamburgers.min.css')}}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/Login_v1/vendor/select2/select2.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{secure_asset'assets/Login_v1/vendor/select2/select2.min.css')}}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/Login_v1/css/util.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/Login_v1/css/main.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{secure_asset'assets/Login_v1/css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{secure_asset'assets/Login_v1/css/main.css')}}">
 <!--===============================================================================================-->
 <script src="assets/jquery.min.js"></script>
 @yield('head')
@@ -37,9 +37,9 @@
 
 	
 <!--===============================================================================================-->
-	<script src="{{asset('assets/Login_v1/vendor/select2/select2.min.js')}}"></script>
+	<script src="{{secure_asset'assets/Login_v1/vendor/select2/select2.min.js')}}"></script>
 <!--===============================================================================================-->
-	<script src="{{asset('assets/Login_v1/vendor/tilt/tilt.jquery.min.js')}}"></script>
+	<script src="{{secure_asset'assets/Login_v1/vendor/tilt/tilt.jquery.min.js')}}"></script>
 <script type="text/javascript" src="assets/webcamjs/webcam.min.js"></script>
 	<script >
 		$('.js-tilt').tilt({
@@ -47,7 +47,7 @@
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="{{asset('assets/Login_v1/js/main.js')}}"></script>
+	<script src="{{secure_asset'assets/Login_v1/js/main.js')}}"></script>
 	@yield('scripts')
 </body>
 </html>
