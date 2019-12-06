@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use Cloudder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
