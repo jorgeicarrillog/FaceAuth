@@ -12,3 +12,4 @@
 */
 Route::get('/', 'Auth\FaceController@login')->name('index');
 Route::post('/upload', 'Auth\FaceController@upload')->name('upload');
+Route::post('/train', 'Auth\FaceController@train')->name('train');

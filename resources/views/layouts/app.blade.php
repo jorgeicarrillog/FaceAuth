@@ -40,7 +40,11 @@
 	<script src="{{secure_asset('assets/Login_v1/vendor/select2/select2.min.js')}}"></script>
 <!--===============================================================================================-->
 	<script src="{{secure_asset('assets/Login_v1/vendor/tilt/tilt.jquery.min.js')}}"></script>
-<script type="text/javascript" src="assets/webcamjs/webcam.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+	<script type="text/javascript" src="assets/webcamjs/webcam.min.js"></script>
 	<script >
 		$('.js-tilt').tilt({
 			scale: 1.1
@@ -49,5 +53,28 @@
 <!--===============================================================================================-->
 	<script src="{{secure_asset('assets/Login_v1/js/main.js')}}"></script>
 	@yield('scripts')
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCUsGp32v_NGDZMsh5-x9eVjVPLxZ3Nqcw",
+    authDomain: "estructura-de-datos-ii.firebaseapp.com",
+    databaseURL: "https://estructura-de-datos-ii.firebaseio.com",
+    projectId: "estructura-de-datos-ii",
+    storageBucket: "estructura-de-datos-ii.appspot.com",
+    messagingSenderId: "965550217093",
+    appId: "1:965550217093:web:54f097e1ce5f596a4696ec",
+    measurementId: "G-MP4PKFG6DW"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 </body>
 </html>
