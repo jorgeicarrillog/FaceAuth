@@ -96,6 +96,9 @@ class FaceController extends Controller
 
 		        $content = $apiRequest->getBody()->getContents();
 		        $response = Cloudder::destroyImages([$id]);
+		        if (isset($user['is_new']) && $user['is_new']==1) {
+		        	$this->rebuild();
+		        }
 		        return $content;
 	    	}
 	    }
@@ -129,9 +132,29 @@ class FaceController extends Controller
 	 
 	        ]);
 
-	        return $createPost->getvalue();
+	        $user = $createPost->getvalue();
+	        $user['is_new'] = 1;
+
+	        return $user;
 	    }else{
 	    	return collect($items)->first();
 	    }
+    }
+
+    private function rebuild()
+    {
+    	$options = [
+            'headers' => [
+				'x-rapidapi-host' => 'lambda-face-recognition.p.rapidapi.com',
+				'x-rapidapi-key' => '90f17ea646msh014a212128373e9p12e3edjsnb0325db240c3',
+            ],
+            'verify' => false,
+            'http_errors' => false,
+            'synchronous' => false
+        ];
+        $client = new \GuzzleHttp\Client();
+        $apiRequest = $client->request('GET', 'https://lambda-face-recognition.p.rapidapi.com/album_rebuild?album='.$this->album.'&albumkey='.$this->albumKey, $options);
+
+        $content = $apiRequest->getBody()->getContents();
     }
 }
