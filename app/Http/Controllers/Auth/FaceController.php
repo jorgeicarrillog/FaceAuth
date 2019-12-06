@@ -14,28 +14,8 @@ class FaceController extends Controller
     }
     public function upload(Request $request)
     {
-    	Storage::put('public/avatars/1.jpg', base64_decode($request->file));
-    	dd(Storage::url('public/avatars/1.jpg'));
-			$options = [
-                'auth' => $credential, 
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'Authorization' => 'Basic '.$credential,
-                ],
-                'json' => [
-                    'trsec' => true,
-                    'parts' => $sms->parts,
-                    'to' => $cellphones,
-                    'from' => 'CR'.str_limit($sms->id,8,''),
-                    'text' => $sms->text,
-                    'dlr-url' => url('/api/sms/response?tel=%p&cp=%P&state=%d'),
-                ],
-                'verify' => false,
-                'http_errors' => false,
-                'synchronous' => false
-            ];
-            $client = new \GuzzleHttp\Client();
-            $response = $client->request('POST', 'https://gateway.plusmms.net/rest/message', $options);
-        
+    	$file = base64_decode($request->file);
+    	$response = Cloudder::upload($file);
+    	dd(Cloudder::show(Cloudder::getPublicId()));
     }
 }
