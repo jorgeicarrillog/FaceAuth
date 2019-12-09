@@ -189,7 +189,7 @@
 				"contentType": false,
 				"data": form
 			}
-			swal({
+			Swal.fire({
 	            html: '<h1><i class="fa fa-spin fa-spinner"></i></h1><p>Autenticando....<br>Espera no cierres la ventana. </p>',
 	            allowOutsideClick:false,
 	            allowEscapeKey:false,
@@ -205,10 +205,10 @@
 					});
 				}else if(response && response.success && auth){
 					Swal.fire({
-						title: 'Autenticación exitosa',
-						text: 'Hola '+response.user.name,
+						text: 'Autenticación exitosa',
+						title: 'Hola '+response.user.name,
 						imageUrl: raw_image_data,
-						imageWidth:120
+						imageWidth:180
 					});			
 				}else{
 					Swal.fire({

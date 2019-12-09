@@ -27,7 +27,7 @@ class FaceController extends Controller
 	    	$options = [
 	            'headers' => [
 					'x-rapidapi-host' => 'lambda-face-recognition.p.rapidapi.com',
-					'x-rapidapi-key' => '90f17ea646msh014a212128373e9p12e3edjsnb0325db240c3',
+					'x-rapidapi-key' => config('services.rapidapi.key'),
 	            ],
 	            'multipart' => [
 	                [
@@ -60,7 +60,7 @@ class FaceController extends Controller
 	        		$uid = collect($content->photos[0]->tags[0]->uids)->sortByDesc('confidence')->first();
 	        		$items = $this->searchBy('entryid', $uid->prediction);
 	        		if (count($items)>0) {
-	        			$merged = array_merge(collect($items)->first()->toArray(),$uid);
+	        			$merged = array_merge(collect($items)->first(),(array) $uid);
 		        		return response()->json(['success'=>true, 'user'=>$merged]);
 	        		}
 	        	}
@@ -80,7 +80,7 @@ class FaceController extends Controller
 		    	$options = [
 		            'headers' => [
 						'x-rapidapi-host' => 'lambda-face-recognition.p.rapidapi.com',
-						'x-rapidapi-key' => '90f17ea646msh014a212128373e9p12e3edjsnb0325db240c3',
+						'x-rapidapi-key' => config('services.rapidapi.key'),
 		            ],
 		            'multipart' => [
 		                [
@@ -182,7 +182,7 @@ class FaceController extends Controller
     	$options = [
             'headers' => [
 				'x-rapidapi-host' => 'lambda-face-recognition.p.rapidapi.com',
-				'x-rapidapi-key' => '90f17ea646msh014a212128373e9p12e3edjsnb0325db240c3',
+				'x-rapidapi-key' => config('services.rapidapi.key'),
             ],
             'verify' => false,
             'http_errors' => false,
