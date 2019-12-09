@@ -52,7 +52,20 @@ class FaceController extends Controller
 
 	        $content = $apiRequest->getBody()->getContents();
 	        $response = Cloudder::destroyImages([$id]);
-	        return $content;
+	        if ($content && $apiRequest->getStatusCode()==200) {
+	        	$content = json_decode(stripslashes($content));
+	        	if ($content->status=="success" 
+	        		&& isset($content->photos) 
+	        		&& isset($content->photos[0]->tags[0]->uids)) {
+	        		$uid = collect($content->photos[0]->tags[0]->uids)->sortByDesc('confidence')->first();
+	        		$items = $this->searchBy('entryid', $uid->prediction);
+	        		if (count($items)>0) {
+	        			$merged = array_merge(collect($items)->first()->toArray(),$uid);
+		        		return response()->json(['success'=>true, 'user'=>$merged]);
+	        		}
+	        	}
+	        }
+		    return response()->json(['success'=>false, 'data'=>$content]);
     	}
     }
     
@@ -96,12 +109,35 @@ class FaceController extends Controller
 
 		        $content = $apiRequest->getBody()->getContents();
 		        $response = Cloudder::destroyImages([$id]);
-		        if (isset($user['is_new']) && $user['is_new']==1) {
-		        	$this->rebuild();
+		        $this->rebuild();
+		        if ($response && $apiRequest->getStatusCode()==200) {
+		        	$content = json_decode(stripslashes($content),true);
+		        	return response()->json(['success'=>true, 'data'=>$content]);
 		        }
-		        return $content;
+		        return response()->json(['success'=>false, 'data'=>$content]);
 	    	}
 	    }
+    }
+
+    private function searchBy($column, $key)
+    {
+        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/FirebaseKey.json');
+        $firebase = (new Factory)
+        ->withServiceAccount($serviceAccount)
+        ->withDatabaseUri('https://estructura-de-datos-ii.firebaseio.com/')
+        ->create();
+ 
+        $database   =   $firebase->getDatabase();
+        $result = $database->getReference('faceauth/users')
+	    // order the reference's children by the values in the field 'height'
+	    ->orderByChild($column)
+	    // returns all persons being exactly 1.98 (meters) tall
+	    ->equalTo($key)
+	    ->getSnapshot();
+
+	    $items = $result->getValue();
+
+	    return $items;
     }
 
     private function findCreate($name, $email) {
@@ -141,7 +177,7 @@ class FaceController extends Controller
 	    }
     }
 
-    private function rebuild()
+    private function rebuild():void
     {
     	$options = [
             'headers' => [

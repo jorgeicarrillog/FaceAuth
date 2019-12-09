@@ -166,12 +166,11 @@
 				upServer(data_uri,auth)
 				//uploadFile(data_uri)
 				// display results in page
-				document.getElementById('results').innerHTML = '<img src="'+data_uri+'" class="rounded-circle"/>';
-				$('#camModal,#camModalReg').modal('hide');
 			} );
 		}
 
 		function upServer(raw_image_data,auth=false) {
+			$('#camModal,#camModalReg').modal('hide');
 			console.log(raw_image_data);
 			var route = "upload";
 			var form = new FormData();
@@ -190,9 +189,34 @@
 				"contentType": false,
 				"data": form
 			}
-
+			swal({
+	            html: '<h1><i class="fa fa-spin fa-spinner"></i></h1><p>Autenticando....<br>Espera no cierres la ventana. </p>',
+	            allowOutsideClick:false,
+	            allowEscapeKey:false,
+	            allowEnterKey:false,
+	            showConfirmButton:false,
+	        });
 			$.ajax(settings).done(function (response) {
 				console.log(response);
+				if (response && response.success && !auth) {
+					Swal.fire({
+						title: 'Registro exitoso',
+						text: 'Ahora puedes autenticarte'
+					});
+				}else if(response && response.success && auth){
+					Swal.fire({
+						title: 'Autenticación exitosa',
+						text: 'Hola '+response.user.name,
+						imageUrl: raw_image_data,
+						imageWidth:120
+					});			
+				}else{
+					Swal.fire({
+						title: 'Aun no estas registrado',
+						text: 'Ingresa tus datos para reconocerte',
+						icon: 'warning'
+					});	
+				}
 			});
 		}
 	</script>
